@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form and Slideshow</title>
+    
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-form {
+            width: 300px;
+            margin-top: 20px;
+        }
+        .contact-form label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .contact-form button {
+            padding: 10px;
+            width: 100%;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .contact-form button:hover {
+            background-color: #218838;
+        }
+        .error {
+            color: red;
+            font-size: 0.9em;
+            display: none;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 500px;
+            margin-top: 30px;
+        }
+        .slideshow-image {
+            width: 100%;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contact Form -->
+    <div class="contact-form">
+        <h2>Contact Us</h2>
+        <label for="name">Name</label>
+        <input type="text" id="name" required>
+        <span class="error" id="nameError">Please enter your name.</span>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" required>
+        <span class="error" id="emailError">Please enter a valid email address.</span>
+
+        <label for="message">Message</label>
+        <textarea id="message" rows="4" required></textarea>
+        <span class="error" id="messageError">Please enter your message.</span>
+
+        <button onclick="validateForm()">Submit</button>
+    </div>
+
+    <!-- Image Slideshow -->
+    <div class="slideshow-container">
+        <img class="slideshow-image" src="images (1).jpeg" alt="Image1 ">
+        <img class="slideshow-image" src="images (2).jpeg" alt="Image2 ">
+        <img class="slideshow-image" src="images (3).jpeg" alt="Image 3">
+        <img class="slideshow-image" src="images (4).jpeg" alt="Image 3">
+        <img class="slideshow-image" src="india news.jpeg" alt="Image 3">
+
+
+
+    </div>
+
+    <script>
+        // Form validation function
+function validateForm() {
+    // Get form fields
+    const name = document.getElementById("name");
+    const email = document.getElementById("email");
+    const message = document.getElementById("message");
+
+    // Get error messages
+    const nameError = document.getElementById("nameError");
+    const emailError = document.getElementById("emailError");
+    const messageError = document.getElementById("messageError");
+
+    // Track if form is valid
+    let formIsValid = true;
+
+    // Validate name
+    if (name.value.trim() === "") {
+        nameError.style.display = "block";
+        formIsValid = false;
+    } else {
+        nameError.style.display = "none";
+    }
+
+    // Validate email
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (!emailPattern.test(email.value)) {
+        emailError.style.display = "block";
+        formIsValid = false;
+    } else {
+        emailError.style.display = "none";
+    }
+
+    // Validate message
+    if (message.value.trim() === "") {
+        messageError.style.display = "block";
+        formIsValid = false;
+    } else {
+        messageError.style.display = "none";
+    }
+
+    // Submit form if valid
+    if (formIsValid) {
+        alert("Form submitted successfully!");
+    }
+}
+
+// Slideshow functionality
+let currentSlide = 0;
+const slides = document.getElementsByClassName("slideshow-image");
+
+function showSlide() {
+    // Hide all slides
+    if(slides.length===0)return;
+
+    for (let i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+
+    // Show the current slide
+    currentSlide = (currentSlide + 1) % slides.length;
+    slides[currentSlide].style.display = "block";
+}
+
+// Start slideshow
+if (slides.length>0){
+setInterval(showSlide, 3000); 
+showSlide(); 
+}
+
+
+    </script>
+</body>
+/
+
+</html>
